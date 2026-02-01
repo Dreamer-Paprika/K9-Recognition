@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/K9-Recognition/static/css/main.c9fe0ab2.css",
+    "main.js": "/K9-Recognition/static/js/main.13c56604.js",
+    "static/media/icons.svg": "/K9-Recognition/static/media/icons.ac6e5ee2dc8bcfcd73ccd2dc81328708.svg",
+    "index.html": "/K9-Recognition/index.html",
+    "main.c9fe0ab2.css.map": "/K9-Recognition/static/css/main.c9fe0ab2.css.map",
+    "main.13c56604.js.map": "/K9-Recognition/static/js/main.13c56604.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c9fe0ab2.css",
+    "static/js/main.13c56604.js"
+  ]
+}
