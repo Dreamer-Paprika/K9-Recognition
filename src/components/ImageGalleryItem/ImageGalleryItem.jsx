@@ -22,9 +22,9 @@ export class ImageGalleryItem extends Component{
         <li key={result.id} className={css.item}>
           <img
             className={css.image}
-            src={result.webformatURL}
-            alt={result.tags}
-            name={result.largeImageURL}
+            src={result.url}
+            alt="Dog Image"
+            name={result.url}
             onClick={imageClick}
           />
         </li>

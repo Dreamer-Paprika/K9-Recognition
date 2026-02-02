@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 //import css from "./Styles.module.css";
-import { startSrch } from "../API/api"
+import { fetchImages } from '../API/api';
 import { loadSrch } from '../API/api';
-import { SearchBar } from '../Searchbar/Searchbar';
+import { Header } from '../Header/Header';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Button } from '../Button/Button';
@@ -18,14 +18,14 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    startSrch('Artificial Intelligence')
-      .then(users => {
-        const response = users.hits;
+    fetchImages()
+      .then(images => {
+        const response = images;
         this.setState({
           searchResults: response,
         });
         setTimeout(() => {
-          this.setState({ isLoading: false });
+          this.setState({ isLoading: false }); 
         }, 2000);
       })
       .catch(error => {
@@ -37,58 +37,6 @@ export class App extends Component {
       });
   }
 
-  handleSubmit = evt => {
-    evt.preventDefault();
-    const { value } = evt.target[0];
-    
-     evt.target[1].style.boxShadow = 'inset 0 0 10px 5px rgba(0, 0, 0, 0.3)';
-     setTimeout(() => {
-       evt.target[1].style.boxShadow = '0px 4px 6px -1px rgba(0, 0, 0, 0.3), 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 10px 12px -6px rgba(0, 0, 0, 0.4)';
-     }, 2000);
-    this.setState({ isLoading: true });
-    startSrch(value)
-      .then(users => {
-        const response = users.hits;
-        const totalResponse = users.totalHits;
-        console.log(users.totalHits);
-        if (totalResponse !== 0) {
-          Notiflix.Notify.success(
-            `Hooray! We found ${users.totalHits} images.`
-          );
-        }
-        if (totalResponse === 0) {
-          Notiflix.Notify.warning(
-            'Sorry, there are no images matching your search query. Please try again.'
-          );
-        }
-        if (totalResponse <= 12 && totalResponse !== 0) {
-          Notiflix.Notify.warning(
-            "We're sorry, but you've reached the end of search results."
-          );
-          this.setState({ fewResponse: true }); //If page is not refreshed this stays true(even when false), hence the need for the else{}
-        } else {
-          this.setState({ fewResponse: false });
-        }
-        this.setState({
-          searchResults: response,
-          searchTerm: value,
-          pageItems: 12,
-          didUserSearch: true,
-          resultsAmount: totalResponse,
-        });
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 2000);
-      })
-      .catch(error => {
-        Notiflix.Notify.failure(
-          'Oops! Something went wrong! Try reloading the page!'
-        );
-        this.setState({ isLoading: false });
-        console.error(`Error message ${error}`);
-      });
-    //console.log(response);
-  };
 
   handleButtonPress = evt => {
     evt.target.style.boxShadow = 'inset 0 0 10px 5px rgba(0, 0, 0, 0.3)';
@@ -155,17 +103,8 @@ export class App extends Component {
     const { fullImage, imageAlt } = this.state;
 
     return (
-      <div
-      /*style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}*/
-      >
-        <SearchBar onCompletion={this.handleSubmit} />
+      <div>
+        <Header/>
         <ImageGallery gallery={searchResults}>
           <ImageGalleryItem
             results={searchResults}
