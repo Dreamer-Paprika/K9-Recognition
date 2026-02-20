@@ -23,7 +23,7 @@ export class ImageGalleryItem extends Component{
           <img
             className={css.image}
             src={result.url}
-            alt="Dog Image"
+            alt={result.id}
             name={result.url}
             onClick={imageClick}
           />

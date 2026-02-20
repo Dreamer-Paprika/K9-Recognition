@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { ThreeCircles } from 'react-loader-spinner';
-import css from './Loader.module.css';
+import css from './Facts.module.css';
 import PropTypes from 'prop-types';
 import dogApiLogo from './thedogapi-logo.svg';
 

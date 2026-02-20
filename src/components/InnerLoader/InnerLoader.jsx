@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { ThreeCircles } from 'react-loader-spinner';
-import css from './Loader.module.css';
+import css from './InnerLoader.module.css';
 import PropTypes from 'prop-types';
 import dogApiLogo from './thedogapi-logo.svg';
 
-export class Loader extends Component{
+export class InnerLoader extends Component{
 
 
     render() {
-        const { isLoading, areDetailsLoading } = this.props;
+        const { areDetailsLoading } = this.props;
 
     
         
         return (
           <>
-            {(isLoading || areDetailsLoading) && (
+            {areDetailsLoading && (
               <div className={css.backDrop}>
                 <div className={css.loaderWrapper}>
                   <div className={css.loaderContainer}>
@@ -35,6 +35,6 @@ export class Loader extends Component{
     }
 }
 
-Loader.propTypes = {
-    isLoading: PropTypes.bool.isRequired,
-  };
+InnerLoader.propTypes = {
+  areDetailsLoading: PropTypes.bool.isRequired,
+};

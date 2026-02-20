@@ -8,14 +8,13 @@ export class Button extends Component{
     render() {
         const { results } = this.props;
         const { onPress } = this.props;
-        const { ifUserSearched } = this.props;
-        const { iflessResponse } = this.props;
+        
         
 
 
         return (
           <div>
-            {results.length !== 0 && ifUserSearched && !iflessResponse?
+            {results.length !== 0 ?
                     (<button onClick={onPress} className={css.loadBtn}>Load More</button>)
                     :
                 null
@@ -27,7 +26,5 @@ export class Button extends Component{
 
 Button.propTypes = {
   results: PropTypes.array.isRequired,
-  onPress: PropTypes.func.isRequired,
-  ifUserSearched: PropTypes.bool.isRequired,
-  iflessResponse: PropTypes.bool.isRequired,
-};
+  onPress: PropTypes.func.isRequired
+}
