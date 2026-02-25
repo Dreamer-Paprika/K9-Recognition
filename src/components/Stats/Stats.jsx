@@ -122,7 +122,6 @@ export class Stats extends Component{
                               </div>
                               <div className={css.statItem}>
                                 Min Life Expectancy: {breed.min_life_expectancy}
-                                /5
                               </div>
                               <div className={css.statItem}>
                                 Playfulness: {breed.playfulness}/5
