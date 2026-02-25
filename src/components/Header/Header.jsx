@@ -12,8 +12,8 @@ export class Header extends Component {
     });
   };
 
-  handleFacts = () => {
-    const galleryArea = document.getElementById('facts');
+  handleStats = () => {
+    const galleryArea = document.getElementById('stats');
     galleryArea.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -24,15 +24,15 @@ export class Header extends Component {
     return (
       <header className={css.header}>
         <div className={css.imageWrapper}>
-          <img className={css.logo} src={logo} />
+          <img className={css.logo} alt='Logo' src={logo} />
         </div>
         <div className={css.innerHeader}>
           <button className={css.button} onClick={this.handleImages}>
             Images
           </button>
           <h1>K9 Recognition</h1>
-          <button className={css.button} onClick={this.handleFacts}>
-            Facts
+          <button className={css.button} onClick={this.handleStats}>
+            Stats
           </button>
         </div>
       </header>

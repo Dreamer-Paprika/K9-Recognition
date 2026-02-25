@@ -204,6 +204,5 @@ export class Modal extends Component {
 }
 
 Modal.propTypes = {
-  altSrc: PropTypes.string.isRequired,
   close: PropTypes.func.isRequired,
 };

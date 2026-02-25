@@ -16,15 +16,18 @@ export class ImageGallery extends Component{
 
     return (
       <>
-        {gallery.length !== 0 ? (
-          <ul className={css.gallery} id="gallery">
-            {children}
-          </ul>
-        ) : (
-          <div className={css.message}>
-            <p className={css.messageItem}>No Pictures</p>
-          </div>
-        )}
+        <div className={css.ImageArea}>
+          <h2 className={css.ImageAreaHeading}>Images</h2>
+          {gallery.length !== 0 ? (
+            <ul className={css.gallery} id="gallery">
+              {children}
+            </ul>
+          ) : (
+            <div className={css.message}>
+              <p className={css.messageItem}>No Pictures</p>
+            </div>
+          )}
+        </div>
       </>
     );
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import css from "./Styles.module.css";
-import { fetchImages, fetchDetails, fetchFacts, fetchBreeds } from '../API/api';
+import { fetchImages, fetchDetails, fetchStats, fetchBreeds } from '../API/api';
 import { nextFetch } from '../API/api';
 import { Header } from '../Header/Header';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
@@ -9,6 +9,7 @@ import { Button } from '../Button/Button';
 import { Loader } from '../Loader/Loader';
 import { InnerLoader } from '../InnerLoader/InnerLoader';
 import { Modal } from '../Modal/Modal';
+import { Stats } from '../Stats/Stats';
 import Notiflix from 'notiflix';
 
 
@@ -18,12 +19,13 @@ export class App extends Component {
     isLoading: false,
     areDetailsLoading: false,
     fullImage: null,
-    imageAlt: "Dog",
+    imageAlt: 'Dog',
     detailsResults: {},
     page: 0,
     isBig: false,
-    Breeds: [],
-    Facts: []
+    BreedsRay: [],
+    StatsRay: [],
+    hasSelected: false
   };
 
   componentDidMount() {
@@ -31,7 +33,7 @@ export class App extends Component {
     fetchImages()
       .then(images => {
         const response = images;
-        console.log(response);
+        //console.log(response);
         this.setState({
           searchResults: response,
         });
@@ -43,13 +45,13 @@ export class App extends Component {
         this.setState({ isLoading: false });
         console.error(`Error message ${error}`);
       });
-    
+
     fetchBreeds()
       .then(breeds => {
         const response = breeds;
-        console.log(response);
+        //console.log(response);
         this.setState({
-          Breeds: response,
+          BreedsRay: response,
         });
         setTimeout(() => {
           this.setState({ isLoading: false });
@@ -62,8 +64,6 @@ export class App extends Component {
         this.setState({ isLoading: false });
         console.error(`Error message ${error}`);
       });
-
-    
   }
 
   handleButtonPress = evt => {
@@ -72,10 +72,10 @@ export class App extends Component {
       evt.target.style.boxShadow =
         '0px 4px 6px -1px rgba(0, 0, 0, 0.3), 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 10px 12px -6px rgba(0, 0, 0, 0.4)';
     }, 2000);
-  
+
     const { page } = this.state;
     let store = page;
-    store ++;
+    store++;
     this.setState({ isLoading: true });
     nextFetch(store)
       .then(images => {
@@ -107,11 +107,11 @@ export class App extends Component {
     });
     fetchDetails(altValue)
       .then(image => {
-        console.log(image);
+        //console.log(image);
         const response = image;
         this.setState({
           detailsResults: response,
-          isBig: true
+          isBig: true,
         });
         setTimeout(() => {
           this.setState({ areDetailsLoading: false });
@@ -124,8 +124,6 @@ export class App extends Component {
         this.setState({ areDetailsLoading: false });
         console.error(`Error message ${error}`);
       });
-      
-      ;
   };
 
   handleClose = evt => {
@@ -133,14 +131,59 @@ export class App extends Component {
       fullImage: null,
       imageAlt: null,
       detailsResults: null,
-      isBig: false
+      isBig: false,
     });
   };
+
+  handleSelect = evt => {
+    this.setState({ isLoading: true });
+    const breedName = evt.target.value;
+    //console.log(breedId);
+    fetchStats(breedName)
+      .then(facts => {
+        const response = facts;
+        console.log(response);
+        this.setState({
+          StatsRay: response,
+          hasSelected: true,
+        });
+        setTimeout(() => {
+          this.setState({ isLoading: false });
+        }, 1000);
+      })
+      .catch(error => {
+        Notiflix.Notify.failure(
+          'Oops! Something went wrong! Try reloading the page!'
+        );
+        this.setState({ isLoading: false });
+        console.error(`Error message ${error}`);
+      });
+
+  };
+
+  handleScroll = () => {
+    const breedSelector = document.getElementById('breedSelector');
+    breedSelector.focus();
+    breedSelector.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  };
+
 
   render() {
     const { searchResults } = this.state;
     const { isLoading } = this.state;
-    const { fullImage, imageAlt, areDetailsLoading, detailsResults, isBig } = this.state;
+    const {
+      fullImage,
+      imageAlt,
+      areDetailsLoading,
+      detailsResults,
+      isBig,
+      BreedsRay,
+      StatsRay,
+      hasSelected,
+    } = this.state;
 
     return (
       <div>
@@ -161,6 +204,14 @@ export class App extends Component {
           ifBig={isBig}
         />
         <Button results={searchResults} onPress={this.handleButtonPress} />
+
+        <Stats
+          BreedsVar={BreedsRay}
+          StatsVar={StatsRay}
+          handleSelect={this.handleSelect}
+          handleScroll={this.handleScroll}
+          hasSelected={hasSelected}
+        />
       </div>
     );
   }

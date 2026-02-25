@@ -63,19 +63,18 @@ export const nextFetch = async (pageNum) => {
   }
 };
 
-export const fetchFacts = async id => {
+export const fetchStats = async name => {
   try {
     const response = await axios.get(
-      `https://api.thedogapi.com/v1/breeds/${id}/facts?limit=2&page=0&order=ASC&lang=en`,
+      `https://api.api-ninjas.com/v1/dogs?name=${name}`,
       {
         headers: {
-          'x-api-key':
-            'live_5svkRgOyWadRJv2cY1CruDv2TtoPMx38PhCFljF5vZ58sqzvCm9c65JFx3p5p2El',
+          'x-api-key': 'gdvQqEx3KBpR51ZfOeJgIA==10aHi9pat7JXS0OQ',
         },
       }
     );
-    const images = await response.data;
-    return images;
+    const facts = await response.data;
+    return facts;
   } catch (error) {
     console.error(error);
   }
