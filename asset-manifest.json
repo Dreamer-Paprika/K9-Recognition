@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/K9-Recognition/static/css/main.612befe0.css",
-    "main.js": "/K9-Recognition/static/js/main.2d5aec91.js",
+    "main.js": "/K9-Recognition/static/js/main.c52d7249.js",
     "static/media/dogFace.png": "/K9-Recognition/static/media/dogFace.b63e64f930d74189879f.png",
     "static/media/sadDog.png": "/K9-Recognition/static/media/sadDog.7fd2ad0183f0cde6e116.png",
     "static/media/icons.svg": "/K9-Recognition/static/media/icons.ac6e5ee2dc8bcfcd73ccd2dc81328708.svg",
     "static/media/thedogapi-logo.svg": "/K9-Recognition/static/media/thedogapi-logo.6191ae30b99a0a98a0eae5a8d0d2e5f9.svg",
     "index.html": "/K9-Recognition/index.html",
     "main.612befe0.css.map": "/K9-Recognition/static/css/main.612befe0.css.map",
-    "main.2d5aec91.js.map": "/K9-Recognition/static/js/main.2d5aec91.js.map"
+    "main.c52d7249.js.map": "/K9-Recognition/static/js/main.c52d7249.js.map"
   },
   "entrypoints": [
     "static/css/main.612befe0.css",
-    "static/js/main.2d5aec91.js"
+    "static/js/main.c52d7249.js"
   ]
 }
